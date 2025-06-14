@@ -1,54 +1,58 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default function decorate(block) {
-  //if (block.querySelector('.hero-container')) return;
+  // Get the first div which contains the content
+  const contentDiv = block.querySelector(':scope > div');
+  if (!contentDiv) return;
 
-  // Create hero container
-  const heroContainer = document.createElement('div');
-  heroContainer.className = 'hero-container';
+  // Get the inner div which contains H1 and picture
+  const innerDiv = contentDiv.querySelector(':scope > div');
+  if (!innerDiv) return;
 
-  // Create hero wrapper
-  const heroWrapper = document.createElement('div');
-  heroWrapper.className = 'hero-wrapper';
+  // Find H1 and picture elements
+  const h1 = innerDiv.querySelector('h1');
+  const picture = innerDiv.querySelector('picture');
+
+  if (!h1 || !picture) return;
 
   // Create hero content
   const heroContent = document.createElement('div');
   heroContent.className = 'hero-content';
 
-  // Create hero inner screen (for the image)
-  const heroInnerScreen = document.createElement('div');
-  heroInnerScreen.className = 'hero-inner-screen';
+  // Create title section
+  const titleSection = document.createElement('div');
+  titleSection.className = 'hero-title-section';
+  titleSection.appendChild(h1);
 
-  // Process the hero block structure
-  const heroDivs = block.querySelectorAll('div.hero > div');
+  // Create hero image section
+  const imageSection = document.createElement('div');
+  imageSection.className = 'hero-image-section';
+
+  // Create device mockup container
+  const deviceContainer = document.createElement('div');
+  deviceContainer.className = 'hero-device-container';
+
+  // Optimize the picture
+  const optimizedPicture = createOptimizedPicture(
+    picture.querySelector('img').src,
+    picture.querySelector('img').alt || '',
+    false,
+    [{ width: '2000' }, { width: '1200' }, { width: '750' }]
+  );
+
+  // Create inner screen
+  const innerScreen = document.createElement('div');
+  innerScreen.className = 'hero-inner-screen';
+  innerScreen.appendChild(optimizedPicture);
+
+  // Assemble the structure
+  deviceContainer.appendChild(innerScreen);
+  imageSection.appendChild(deviceContainer);
   
-  heroDivs.forEach((div) => {
-    // Check for text content (title)
-    const textParagraph = div.querySelector('p');
-    if (textParagraph && !textParagraph.querySelector('picture')) {
-      // This is the title text
-      const heroTitle = document.createElement('div');
-      heroTitle.className = 'hero-title';
-      const titleElement = document.createElement('h1');
-      titleElement.textContent = textParagraph.textContent;
-      heroTitle.appendChild(titleElement);
-      heroContent.appendChild(heroTitle);
-    }
-    
-    // Check for picture (inner screen image)
-    const picture = div.querySelector('picture');
-    if (picture) {
-      // Move the picture to hero inner screen
-      heroInnerScreen.appendChild(picture.cloneNode(true));
-    }
-  });
-
-  // Assemble the hero structure: content first, then inner screen
-  heroWrapper.appendChild(heroContent);
-  heroWrapper.appendChild(heroInnerScreen);
-  heroContainer.appendChild(heroWrapper);
+  heroContent.appendChild(titleSection);
+  heroContent.appendChild(imageSection);
 
   // Clear and replace block content
   block.textContent = '';
-  block.appendChild(heroContainer);
+  block.appendChild(heroContent);
 }

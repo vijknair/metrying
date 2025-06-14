@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Block Test</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="blocks/hero/hero.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            width: 100%;
+        }
+        /* Simulate AEM section structure */
+        .section {
+            margin: var(--spacing-xl) 0;
+        }
+        .section > div {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 var(--spacing-md);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <!-- Simulate AEM section structure -->
+        <div class="section">
+            <div>
+                <div class="hero">
+                  <div>
+                    <div>
+                      <h1 id="build-with-ai">Build with AI</h1>
+                      <p>
+                        <picture>
+                          <source type="image/webp" srcset="https://picsum.photos/2000/800?random=1" media="(min-width: 600px)">
+                          <source type="image/webp" srcset="https://picsum.photos/750/600?random=1">
+                          <source type="image/png" srcset="https://picsum.photos/2000/800?random=1" media="(min-width: 600px)">
+                          <img loading="lazy" alt="Hero image" src="https://picsum.photos/750/600?random=1" width="1600" height="660">
+                        </picture>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Add a features-carousel section to test spacing -->
+        <div class="section">
+            <div>
+                <div class="features-carousel">
+                    <div>
+                        <div>
+                            <h2>Features Section</h2>
+                            <p>This is a test features section to verify proper spacing between sections.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/aem.js"></script>
+    <script src="blocks/hero/hero.js"></script>
+    <script>
+        // Initialize the hero block
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroBlock = document.querySelector('.hero');
+            if (heroBlock) {
+                // Import and call the decorate function
+                import('./blocks/hero/hero.js').then(module => {
+                    module.default(heroBlock);
+                }).catch(error => {
+                    console.error('Error loading hero module:', error);
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

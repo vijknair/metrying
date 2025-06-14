@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards Carousel Test</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="blocks/cards/cards.css">
+    <style>
+        body {
+            padding: 2rem;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Cards Carousel Test</h1>
+        
+        <div class="cards">
+            <div>
+                <div>
+                    <picture>
+                        <img src="https://picsum.photos/400/300?random=1" alt="Card 1">
+                    </picture>
+                </div>
+                <div>
+                    <h3>Card Title 1</h3>
+                    <p>This is the description for card 1. It contains some sample text to demonstrate the layout.</p>
+                    <div class="button-container">
+                        <a href="#" class="button button-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div>
+                    <picture>
+                        <img src="https://picsum.photos/400/300?random=2" alt="Card 2">
+                    </picture>
+                </div>
+                <div>
+                    <h3>Card Title 2</h3>
+                    <p>This is the description for card 2. It contains some sample text to demonstrate the layout.</p>
+                    <div class="button-container">
+                        <a href="#" class="button button-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div>
+                    <picture>
+                        <img src="https://picsum.photos/400/300?random=3" alt="Card 3">
+                    </picture>
+                </div>
+                <div>
+                    <h3>Card Title 3</h3>
+                    <p>This is the description for card 3. It contains some sample text to demonstrate the layout.</p>
+                    <div class="button-container">
+                        <a href="#" class="button button-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div>
+                    <picture>
+                        <img src="https://picsum.photos/400/300?random=4" alt="Card 4">
+                    </picture>
+                </div>
+                <div>
+                    <h3>Card Title 4</h3>
+                    <p>This is the description for card 4. It contains some sample text to demonstrate the layout.</p>
+                    <div class="button-container">
+                        <a href="#" class="button button-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div>
+                    <picture>
+                        <img src="https://picsum.photos/400/300?random=5" alt="Card 5">
+                    </picture>
+                </div>
+                <div>
+                    <h3>Card Title 5</h3>
+                    <p>This is the description for card 5. It contains some sample text to demonstrate the layout.</p>
+                    <div class="button-container">
+                        <a href="#" class="button button-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div>
+                    <picture>
+                        <img src="https://picsum.photos/400/300?random=6" alt="Card 6">
+                    </picture>
+                </div>
+                <div>
+                    <h3>Card Title 6</h3>
+                    <p>This is the description for card 6. It contains some sample text to demonstrate the layout.</p>
+                    <div class="button-container">
+                        <a href="#" class="button button-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/aem.js"></script>
+    <script src="blocks/cards/cards.js"></script>
+    <script>
+        // Initialize the cards block
+        document.addEventListener('DOMContentLoaded', function() {
+            const cardsBlock = document.querySelector('.cards');
+            if (cardsBlock) {
+                // Import and call the decorate function
+                import('./blocks/cards/cards.js').then(module => {
+                    module.default(cardsBlock);
+                }).catch(error => {
+                    console.error('Error loading cards module:', error);
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
